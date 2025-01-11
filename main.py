@@ -1,9 +1,8 @@
+BOOK_PATH = "books/frankenstein.txt"
 def main():
-    with open("/home/test/workspace/github.com/jeepeer/bookbot/books/frankenstein.txt") as f:
+    with open(BOOK_PATH) as f:
         file_contents = f.read()
-        #print(file_contents)
-        #print(wordCounter(file_contents))
-        print(get_chars_dict(file_contents))
+        print_book_report(file_contents)
 
 def get_num_words(text):  
     print(len(text.split()))
@@ -18,5 +17,15 @@ def get_chars_dict(text):
             characters[lower_char] = 1
 
     return characters
+
+def print_book_report(text):
+    report = f"--- begin report of {BOOK_PATH} ---"
+    report += f"\n{get_num_words(text)} words found in the document\n"
+    characters = get_chars_dict(text)
+    for char in characters:
+        if char.isalpha():
+            report += f"\nThe '{char}' character was found {characters[char]} times"
+    print(report)
+    
 
 main()
